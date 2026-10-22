@@ -17,29 +17,40 @@
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
     "db:verify": "tsx src/scripts/verify-db.ts",
-    "db:test-constraints": "tsx src/scripts/verify-constraints.ts"
+    "db:test-constraints": "tsx src/scripts/verify-constraints.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
+    "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^20.19.43",
     "@types/pg": "^8.23.1",
+    "@types/supertest": "^7.2.1",
     "eslint": "^9.39.5",
     "globals": "^14.0.0",
     "prisma": "^7.10.1",
+    "supertest": "^7.3.1",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.72.0"
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
+    "@project/contracts": "file:../../packages/contracts",
     "argon2": "^0.45.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^18.0.8",
     "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
     "helmet": "^8.3.0",
-    "pg": "^8.23.1"
+    "jose": "^6.2.13",
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
   }
 }

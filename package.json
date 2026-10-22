@@ -17,6 +17,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\""
   },
   "devDependencies": {
+    "@types/node": "^26.6.5",
     "concurrently": "^10.0.6",
     "prettier": "^3.9.10"
   }

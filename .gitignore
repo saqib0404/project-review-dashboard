@@ -41,3 +41,4 @@ Thumbs.db
 
 # Generated Prisma client (regenerated during build)
 apps/api/src/generated/prisma/
+*-cookies.txt
