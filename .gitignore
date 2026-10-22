@@ -38,3 +38,6 @@ Thumbs.db
 # Prisma generated local files
 *.db
 *.db-journal
+
+# Generated Prisma client (regenerated during build)
+apps/api/src/generated/prisma/

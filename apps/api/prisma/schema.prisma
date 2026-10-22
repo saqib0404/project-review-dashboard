@@ -1,0 +1,118 @@
+
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  moduleFormat    = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  STUDENT
+  MENTOR
+  ADMIN
+}
+
+enum ProjectStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ReviewDecision {
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @db.VarChar(100)
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash")
+  role         UserRole @default(STUDENT)
+  isActive     Boolean  @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  project         Project?
+  reviews         Review[]
+  refreshSessions RefreshSession[]
+
+  @@index([role])
+  @@map("users")
+}
+
+model Project {
+  id String @id @default(uuid()) @db.Uuid
+
+  studentId String @unique @map("student_id") @db.Uuid
+
+  name        String @db.VarChar(150)
+  description String @db.Text
+
+  repositoryUrl String @map("repository_url") @db.VarChar(2048)
+
+  repositoryKey String @unique @map("repository_key") @db.VarChar(500)
+
+  liveUrl String? @map("live_url") @db.VarChar(2048)
+
+  status ProjectStatus @default(PENDING)
+
+  version Int @default(1)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  student User @relation(fields: [studentId],references: [id],onDelete: Restrict)
+
+  reviews Review[]
+
+  @@index([status, createdAt, id])
+  @@map("projects")
+}
+
+model Review {
+  id String @id @default(uuid()) @db.Uuid
+
+  projectId String @map("project_id") @db.Uuid
+  reviewerId String @map("reviewer_id") @db.Uuid
+
+  decision ReviewDecision
+
+  reason String? @db.VarChar(1000)
+
+  projectVersion Int @map("project_version")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  project Project @relation(fields: [projectId],references: [id],onDelete: Restrict)
+
+  reviewer User @relation(fields: [reviewerId],references: [id],onDelete: Restrict)
+
+  @@index([projectId, createdAt])
+  @@index([reviewerId])
+  @@map("reviews")
+}
+
+model RefreshSession {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @map("user_id") @db.Uuid
+
+  tokenHash String @unique @map("token_hash") @db.VarChar(128)
+
+  expiresAt DateTime @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("refresh_sessions")
+}
