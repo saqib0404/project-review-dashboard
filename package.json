@@ -1,0 +1,23 @@
+{
+  "name": "project-review-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n WEB,API \"npm run dev -w @project/web\" \"npm run dev -w @project/api\"",
+    "dev:web": "npm run dev -w @project/web",
+    "dev:api": "npm run dev -w @project/api",
+    "build": "npm run build -w @project/contracts && npm run build -w @project/api && npm run build -w @project/web",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "npm run lint -w @project/api && npm run lint -w @project/web",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\""
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "prettier": "^3.9.10"
+  }
+}
