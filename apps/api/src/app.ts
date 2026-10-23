@@ -7,6 +7,8 @@ import { authRouter } from "./modules/auth/auth.routes.js";
 import { requireSameOrigin } from "./middleware/csrf.js";
 import { AppError } from "./lib/app-error.js";
 import { projectRouter } from "./modules/projects/project.routes.js";
+import { reviewRouter } from "./modules/reviews/review.routes.js";
+import { Prisma } from "./generated/prisma/client.js";
 
 const app = express();
 
@@ -48,6 +50,7 @@ app.use("/api/v1", requireSameOrigin);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/projects", projectRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 app.use((_req, _res, next) => {
   next(new AppError(404, "Route not found"));
@@ -74,6 +77,17 @@ app.use(
       res.status(400).json({
         success: false,
         message: "Malformed JSON request",
+      });
+      return;
+    }
+
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2034"
+    ) {
+      res.status(409).json({
+        success: false,
+        message: "Concurrent database update detected. Reload and try again.",
       });
       return;
     }

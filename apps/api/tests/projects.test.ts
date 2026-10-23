@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { projectSubmissionSchema } from "@project/contracts";
-import { normalizeGitHubRepository } from "./project.repository-url.js";
+import { normalizeGitHubRepository } from "../src/modules/projects/project.repository-url.js";
 
 const validProject = {
   name: "ProjectFlow Dashboard",

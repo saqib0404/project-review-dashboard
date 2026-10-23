@@ -19,7 +19,9 @@
     "db:verify": "tsx src/scripts/verify-db.ts",
     "db:test-constraints": "tsx src/scripts/verify-constraints.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:unit": "vitest run tests/auth.test.ts tests/projects.test.ts tests/reviews.validation.test.ts",
+    "test:integration": "vitest run tests/reviews.integration.test.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
