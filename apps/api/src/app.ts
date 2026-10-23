@@ -6,6 +6,7 @@ import { prisma } from "./lib/prisma.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
 import { requireSameOrigin } from "./middleware/csrf.js";
 import { AppError } from "./lib/app-error.js";
+import { projectRouter } from "./modules/projects/project.routes.js";
 
 const app = express();
 
@@ -44,7 +45,9 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 app.use("/api/v1", requireSameOrigin);
+
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/projects", projectRouter);
 
 app.use((_req, _res, next) => {
   next(new AppError(404, "Route not found"));
@@ -62,6 +65,7 @@ app.use(
       res.status(error.statusCode).json({
         success: false,
         message: error.message,
+        ...(error.details !== undefined ? { errors: error.details } : {}),
       });
       return;
     }

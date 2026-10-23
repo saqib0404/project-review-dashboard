@@ -11,3 +11,10 @@ export interface ApiResponse<T> {
   message: string;
   data?: T;
 }
+
+export { projectSubmissionSchema } from "./project.schema.js";
+
+export type {
+  ProjectSubmissionInput,
+  ValidatedProjectSubmission,
+} from "./project.schema.js";

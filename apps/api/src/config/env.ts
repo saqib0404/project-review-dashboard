@@ -16,6 +16,9 @@ const envSchema = z.object({
   JWT_ISSUER: z.string().min(1).default("projectflow-api"),
   JWT_AUDIENCE: z.string().min(1).default("projectflow-web"),
 
+  UPSTASH_REDIS_REST_URL: z.url(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
+
   WEB_ORIGIN: z.url(),
 });
 
