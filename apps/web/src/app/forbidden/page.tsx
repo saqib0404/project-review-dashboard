@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ShieldAlert } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function ForbiddenPage() {
   return (
@@ -13,9 +13,9 @@ export default function ForbiddenPage() {
         Your account does not have permission to access this workspace.
       </p>
 
-      <Button asChild>
-        <Link href="/">Return home</Link>
-      </Button>
+      <Link href="/" className={buttonVariants({ variant: "default" })}>
+        Return home
+      </Link>
     </main>
   );
 }

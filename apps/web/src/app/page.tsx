@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const features = [
   {
@@ -26,20 +27,25 @@ export default function Home() {
           </Link>
 
           <nav aria-label="Main navigation" className="flex items-center gap-3">
-            <Button
-              asChild
-              variant="ghost"
-              className="text-white hover:bg-slate-800 hover:text-white"
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "text-white hover:bg-slate-800 hover:text-white",
+              )}
             >
-              <Link href="/login">Sign in</Link>
-            </Button>
+              Sign in
+            </Link>
 
-            <Button
-              asChild
-              className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+            <Link
+              href="/signup"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "bg-cyan-500 text-slate-950 hover:bg-cyan-400",
+              )}
             >
-              <Link href="/signup">Get started</Link>
-            </Button>
+              Get started
+            </Link>
           </nav>
         </header>
 
@@ -59,22 +65,25 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button
-              asChild
-              size="lg"
-              className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+            <Link
+              href="/signup"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "bg-cyan-500 text-slate-950 hover:bg-cyan-400",
+              )}
             >
-              <Link href="/signup">Submit your project</Link>
-            </Button>
+              Submit your project
+            </Link>
 
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-slate-700 bg-transparent text-white hover:bg-slate-800 hover:text-white"
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "border-slate-700 bg-transparent text-white hover:bg-slate-800 hover:text-white",
+              )}
             >
-              <Link href="/login">Sign in</Link>
-            </Button>
+              Sign in
+            </Link>
           </div>
         </section>
 

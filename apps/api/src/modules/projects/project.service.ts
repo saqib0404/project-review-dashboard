@@ -60,14 +60,44 @@ export async function createProject(
 export async function getMyProject(studentId: string) {
   const project = await prisma.project.findUnique({
     where: { studentId },
-    select: projectSelect,
+
+    select: {
+      ...projectSelect,
+
+      reviews: {
+        where: {
+          decision: "REJECTED",
+        },
+        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+        take: 1,
+        select: {
+          reason: true,
+          createdAt: true,
+          projectVersion: true,
+        },
+      },
+    },
   });
 
   if (!project) {
     throw new AppError(404, "You have not submitted a project");
   }
 
-  return project;
+  const { reviews, ...details } = project;
+
+  const latestRejection = reviews[0];
+
+  return {
+    ...details,
+
+    reviewFeedback:
+      project.status === "REJECTED" && latestRejection
+        ? {
+            reason: latestRejection.reason,
+            reviewedAt: latestRejection.createdAt,
+          }
+        : null,
+  };
 }
 
 export async function reviseProject(
