@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 const features = [
   {
     title: "Student Submissions",
@@ -17,14 +20,27 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-6xl px-6 py-8">
-        <header className="flex items-center justify-between border-b border-slate-800 pb-6">
-          <div className="text-xl font-bold tracking-tight">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-6">
+          <Link href="/" className="text-xl font-bold tracking-tight">
             Project<span className="text-cyan-400">Flow</span>
-          </div>
+          </Link>
 
-          <span className="rounded-full border border-slate-700 px-4 py-2 text-xs text-slate-300">
-            Development Preview
-          </span>
+          <nav aria-label="Main navigation" className="flex items-center gap-3">
+            <Button
+              asChild
+              variant="ghost"
+              className="text-white hover:bg-slate-800 hover:text-white"
+            >
+              <Link href="/login">Sign in</Link>
+            </Button>
+
+            <Button
+              asChild
+              className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+            >
+              <Link href="/signup">Get started</Link>
+            </Button>
+          </nav>
         </header>
 
         <section className="py-24 text-center">
@@ -42,10 +58,24 @@ export default function Home() {
             to review their work with clarity and confidence.
           </p>
 
-          <p className="mt-8 text-sm text-slate-500">
-            Foundation setup complete. Authentication and dashboards are coming
-            in upcoming milestones.
-          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+            >
+              <Link href="/signup">Submit your project</Link>
+            </Button>
+
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-slate-700 bg-transparent text-white hover:bg-slate-800 hover:text-white"
+            >
+              <Link href="/login">Sign in</Link>
+            </Button>
+          </div>
         </section>
 
         <section className="grid gap-6 pb-20 md:grid-cols-3">
