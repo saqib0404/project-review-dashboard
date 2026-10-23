@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { AlertCircle, Github, Globe, Loader2, Save, Send } from "lucide-react";
+import { AlertCircle, GitBranch, Globe, Loader2, Save, Send } from "lucide-react";
 
 import {
   projectSubmissionSchema,
@@ -144,7 +144,7 @@ export function ProjectForm({
         </Label>
 
         <div className="relative">
-          <Github
+          <GitBranch
             className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400"
             aria-hidden="true"
           />
