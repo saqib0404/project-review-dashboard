@@ -21,7 +21,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:unit": "vitest run tests/auth.test.ts tests/projects.test.ts tests/reviews.validation.test.ts tests/student-portal.contract.test.ts tests/security/csrf.test.ts",
-    "test:integration": "vitest run tests/reviews.integration.test.ts tests/security/sessions.integration.test.ts"
+    "test:integration": "vitest run tests/reviews.integration.test.ts tests/security/sessions.integration.test.ts",
+    "vercel-build": "npm run build -w @project/contracts && npm run build -w @project/api"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
