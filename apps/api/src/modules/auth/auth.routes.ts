@@ -1,8 +1,6 @@
 import { Router } from "express";
 import { z } from "zod";
-import {
-  limitCredentialAttempts,
-} from "../../middleware/auth-rate-limit.js";
+import { limitCredentialAttempts } from "../../middleware/auth-rate-limit.js";
 
 import { AppError } from "../../lib/app-error.js";
 import {

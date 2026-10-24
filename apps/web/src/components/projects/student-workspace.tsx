@@ -82,7 +82,17 @@ export function StudentWorkspace() {
   }, [router]);
 
   useEffect(() => {
-    void loadProject();
+    let cancelled = false;
+
+    void Promise.resolve().then(() => {
+      if (!cancelled) {
+        void loadProject();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [loadProject]);
 
   function handleSaved(project: StudentProject) {
@@ -236,7 +246,7 @@ export function StudentWorkspace() {
                 </CardTitle>
 
                 <p className="text-sm text-slate-500">
-                  Update your submission based on the mentor's feedback.
+                  Update your submission based on the mentor&apos;s feedback.
                 </p>
               </CardHeader>
 

@@ -64,7 +64,7 @@ app.use(
     res: express.Response,
     _next: express.NextFunction,
   ) => {
-     void _next;
+    void _next;
     if (error instanceof AppError) {
       res.status(error.statusCode).json({
         success: false,
