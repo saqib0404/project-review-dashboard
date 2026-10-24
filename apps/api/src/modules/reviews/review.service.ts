@@ -79,20 +79,19 @@ export async function listProjects(query: ProjectListQuery) {
 // Aggregate counts directly inside PostgreSQL.
 
 export async function getReviewStatistics() {
-  const [pending, approved, rejected] =
-    await prisma.$transaction([
-      prisma.project.count({
-        where: { status: "PENDING" },
-      }),
+  const [pending, approved, rejected] = await prisma.$transaction([
+    prisma.project.count({
+      where: { status: "PENDING" },
+    }),
 
-      prisma.project.count({
-        where: { status: "APPROVED" },
-      }),
+    prisma.project.count({
+      where: { status: "APPROVED" },
+    }),
 
-      prisma.project.count({
-        where: { status: "REJECTED" },
-      }),
-    ]);
+    prisma.project.count({
+      where: { status: "REJECTED" },
+    }),
+  ]);
 
   return {
     total: pending + approved + rejected,
@@ -101,7 +100,6 @@ export async function getReviewStatistics() {
     rejected,
   };
 }
-
 
 // Get full submission details for review.
 export async function getReviewProject(projectId: string) {

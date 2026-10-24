@@ -2,7 +2,6 @@ import { Router } from "express";
 import { z } from "zod";
 import {
   limitCredentialAttempts,
-  limitRefreshAttempts,
 } from "../../middleware/auth-rate-limit.js";
 
 import { AppError } from "../../lib/app-error.js";
@@ -107,7 +106,9 @@ authRouter.post("/logout", async (req, res) => {
     try {
       const claims = await verifyToken(token, "refresh");
       await revokeSession(claims.sessionId, claims.userId);
-    } catch {}
+    } catch {
+      // Intentionally ignore this optional operation's failure.
+    }
   }
 
   clearAuthCookies(res);
