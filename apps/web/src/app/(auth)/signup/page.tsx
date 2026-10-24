@@ -26,7 +26,7 @@ export default function SignupPage() {
 
         <Card className="shadow-2xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Create your account</CardTitle>
+            <CardTitle className="text-2xl"><h1>Create your account</h1></CardTitle>
 
             <CardDescription>
               Join as a student and start submitting projects.

@@ -1,5 +1,5 @@
 import express from "express";
-import helmet from "helmet";
+// import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
 import { prisma } from "./lib/prisma.js";
@@ -13,7 +13,7 @@ import { Prisma } from "./generated/prisma/client.js";
 const app = express();
 
 app.disable("x-powered-by");
-app.use(helmet());
+// app.use(helmet());
 app.use(express.json({ limit: "100kb" }));
 app.use(cookieParser());
 
