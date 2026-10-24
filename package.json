@@ -29,5 +29,8 @@
     "concurrently": "^10.0.6",
     "dotenv": "^18.0.9",
     "prettier": "^3.9.10"
+  },
+  "dependencies": {
+    "@project/contracts": "^1.0.0"
   }
 }
