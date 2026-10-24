@@ -14,11 +14,20 @@
     "typecheck": "npm run typecheck --workspaces",
     "lint": "npm run lint -w @project/api && npm run lint -w @project/web",
     "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:smoke": "playwright test public-pages.spec.ts accessibility.spec.ts",
+    "test:api:unit": "npm run test:unit -w @project/api",
+    "test:api:integration": "npm run test:integration -w @project/api"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "concurrently": "^10.0.6",
+    "dotenv": "^18.0.9",
     "prettier": "^3.9.10"
   }
 }

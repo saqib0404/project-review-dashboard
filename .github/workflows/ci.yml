@@ -1,0 +1,114 @@
+name: ProjectFlow CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: TypeScript, Lint, Tests and Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://test:test@localhost:5432/test
+      DIRECT_URL: postgresql://test:test@localhost:5432/test
+      JWT_ACCESS_SECRET: ci-only-access-secret-abcdefghijklmnopqrstuvwxyz-123456
+      JWT_REFRESH_SECRET: ci-only-refresh-secret-abcdefghijklmnopqrstuvwxyz-654321
+      JWT_ISSUER: projectflow-api
+      JWT_AUDIENCE: projectflow-web
+      WEB_ORIGIN: http://localhost:3000
+      UPSTASH_REDIS_REST_URL: https://example.upstash.io
+      UPSTASH_REDIS_REST_TOKEN: ci-placeholder-token
+      API_INTERNAL_URL: http://localhost:5000
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npm run db:generate -w @project/api
+
+      - name: Build shared contracts
+        run: npm run build -w @project/contracts
+
+      - name: TypeScript checks
+        run: npm run typecheck
+
+      - name: ESLint checks
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test:unit -w @project/api
+
+      - name: Production builds
+        run: npm run build
+
+      - name: Formatting
+        run: npm run format:check
+
+  browser-smoke:
+    name: Public Browser and Accessibility Tests
+    runs-on: ubuntu-latest
+    needs: quality
+    timeout-minutes: 20
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://test:test@localhost:5432/test
+      DIRECT_URL: postgresql://test:test@localhost:5432/test
+      JWT_ACCESS_SECRET: ci-only-access-secret-abcdefghijklmnopqrstuvwxyz-123456
+      JWT_REFRESH_SECRET: ci-only-refresh-secret-abcdefghijklmnopqrstuvwxyz-654321
+      JWT_ISSUER: projectflow-api
+      JWT_AUDIENCE: projectflow-web
+      WEB_ORIGIN: http://localhost:3000
+      UPSTASH_REDIS_REST_URL: https://example.upstash.io
+      UPSTASH_REDIS_REST_TOKEN: ci-placeholder-token
+      API_INTERNAL_URL: http://localhost:5000
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run public browser and accessibility tests
+        run: npm run test:e2e:smoke
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: ignore

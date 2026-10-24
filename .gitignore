@@ -42,3 +42,6 @@ Thumbs.db
 # Generated Prisma client (regenerated during build)
 apps/api/src/generated/prisma/
 *-cookies.txt
+
+.env.e2e
+.env.e2e.*

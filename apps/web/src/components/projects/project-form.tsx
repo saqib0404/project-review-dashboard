@@ -4,7 +4,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { AlertCircle, GitBranch, Globe, Loader2, Save, Send } from "lucide-react";
+import {
+  AlertCircle,
+  GitBranch,
+  Globe,
+  Loader2,
+  Save,
+  Send,
+} from "lucide-react";
 
 import {
   projectSubmissionSchema,

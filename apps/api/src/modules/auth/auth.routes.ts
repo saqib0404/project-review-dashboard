@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { rateLimit } from "express-rate-limit";
 import { z } from "zod";
+import {
+  limitCredentialAttempts,
+  limitRefreshAttempts,
+} from "../../middleware/auth-rate-limit.js";
 
 import { AppError } from "../../lib/app-error.js";
 import {
@@ -28,17 +31,6 @@ import { verifyToken } from "./auth.tokens.js";
 
 export const authRouter = Router();
 
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 10,
-  standardHeaders: "draft-8",
-  legacyHeaders: false,
-  message: {
-    success: false,
-    message: "Too many requests. Try again later.",
-  },
-});
-
 function validationError(error: z.ZodError) {
   return {
     success: false,
@@ -51,7 +43,7 @@ function validationError(error: z.ZodError) {
 }
 
 // Student signup
-authRouter.post("/signup", authLimiter, async (req, res) => {
+authRouter.post("/signup", limitCredentialAttempts, async (req, res) => {
   const parsed = signupSchema.safeParse(req.body);
 
   if (!parsed.success) {
@@ -69,7 +61,7 @@ authRouter.post("/signup", authLimiter, async (req, res) => {
 });
 
 // Login for all existing roles
-authRouter.post("/login", authLimiter, async (req, res) => {
+authRouter.post("/login", limitCredentialAttempts, async (req, res) => {
   const parsed = loginSchema.safeParse(req.body);
 
   if (!parsed.success) {
@@ -89,7 +81,7 @@ authRouter.post("/login", authLimiter, async (req, res) => {
 });
 
 // Rotate refresh token
-authRouter.post("/refresh", authLimiter, async (req, res) => {
+authRouter.post("/refresh", limitCredentialAttempts, async (req, res) => {
   const token = req.cookies?.[REFRESH_COOKIE];
 
   if (typeof token !== "string") {

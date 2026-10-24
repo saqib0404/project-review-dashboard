@@ -1,8 +1,4 @@
-
-export type ReviewStatus =
-  | "PENDING"
-  | "APPROVED"
-  | "REJECTED";
+export type ReviewStatus = "PENDING" | "APPROVED" | "REJECTED";
 
 export type StatusFilter = "ALL" | ReviewStatus;
 
