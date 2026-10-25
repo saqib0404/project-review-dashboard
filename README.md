@@ -12,13 +12,10 @@ Prisma, Tailwind CSS and shadcn/ui.
 ## Live Application
 
 Frontend:
-https://REPLACE-WITH-ACTUAL-FRONTEND-DOMAIN
+https://project-review-dashboard-volj.vercel.app
 
 API Health:
-https://REPLACE-WITH-ACTUAL-FRONTEND-DOMAIN/api/v1/health
-
-Screenshots:
-See docs/screenshots/.
+https://project-review-dashboard-chi.vercel.app/api/v1/health
 
 ## Overview
 
@@ -136,7 +133,7 @@ Requirements:
 
 Clone:
 
-    git clone YOUR_REPOSITORY_URL
+    git clone https://github.com/saqib0404/project-review-dashboard
     cd project-review-dashboard
 
 Install:
@@ -148,7 +145,6 @@ Configure:
 - apps/api/.env
 - apps/web/.env.local
 
-Never commit real environment files.
 
 Generate Prisma Client:
 
@@ -278,8 +274,3 @@ docs/deployment.md
 - Search across submissions
 - Email notifications
 - Additional review analytics
-
-## License
-
-See LICENSE if a license is included in the repository.
-Until one is added, standard copyright rules apply.

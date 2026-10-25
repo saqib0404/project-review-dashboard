@@ -119,17 +119,4 @@ Integration:
 
 Run integration tests only against a disposable test database.
 
-## Future Frontend Integration
 
-Step 8 will consume these endpoints for:
-
-- Statistics cards
-- Server-paginated data table
-- Status filters
-- Project detail screen
-- Approval/rejection dialogs
-- Review history
-
-```
-
-```

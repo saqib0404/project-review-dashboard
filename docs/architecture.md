@@ -48,6 +48,3 @@ Neon will provide PostgreSQL storage.
 
 Upstash will provide distributed rate limiting.
 
-```
-
-```

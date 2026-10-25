@@ -48,9 +48,13 @@ Public signup always creates STUDENT accounts.
 ## Routes
 
 POST /api/v1/auth/signup
+
 POST /api/v1/auth/login
+
 POST /api/v1/auth/refresh
+
 POST /api/v1/auth/logout
+
 GET /api/v1/auth/me
 
 ## Security Decisions
@@ -88,6 +92,3 @@ Manual API verification includes signup, login,
 profile access, role checks, refresh rotation,
 old-token replay and logout.
 
-```
-
-```

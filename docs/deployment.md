@@ -115,14 +115,7 @@ Do not run destructive tests against production.
 
 ## Release Verification
 
-Production frontend URL:
-REPLACE_WITH_VERIFIED_URL
+[Production frontend URL](https://project-review-dashboard-volj.vercel.app)
 
-Production API URL:
-REPLACE_WITH_VERIFIED_URL
+[Production API URL](https://project-review-dashboard-chi.vercel.app/api/v1/health)
 
-Release commit:
-REPLACE_WITH_FINAL_COMMIT_HASH
-
-Release date:
-REPLACE_WITH_ACTUAL_DATE

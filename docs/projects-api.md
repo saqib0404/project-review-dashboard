@@ -110,22 +110,3 @@ Run:
 
 Check actual API responses using curl.
 
-## Future Work
-
-Step 5:
-
-- Mentor review endpoints
-- Approval and rejection
-- Review history
-- Server-side pagination
-- Aggregated statistics
-
-Step 7:
-
-- Student submission frontend
-- Form validation and feedback
-- Submission status UI
-
-```
-
-```

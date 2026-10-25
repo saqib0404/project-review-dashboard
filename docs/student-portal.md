@@ -105,10 +105,3 @@ Manual verification:
 7. Approve through mentor API
 8. Confirm editing is disabled
 
-## Next Milestone
-
-Step 8: Mentor dashboard frontend.
-
-```
-
-```

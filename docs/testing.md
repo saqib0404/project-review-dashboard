@@ -83,4 +83,3 @@ Before deployment:
 - Builds pass
 - Critical security regressions pass
 
-Production verification occurs in Step 10.

@@ -93,16 +93,3 @@ Verify logout and protected route redirects.
 
 Inspect responsiveness across mobile and desktop.
 
-## Remaining Work
-
-Step 7:
-Student submission form and status tracking.
-
-Step 8:
-Mentor project table, filtering, statistics and reviews.
-
-Step 9:
-Automated browser testing, accessibility and security.
-
-Step 10:
-Production deployment and live verification.

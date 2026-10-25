@@ -82,20 +82,3 @@ Verify that stale decisions cannot overwrite reviews.
 
 Verify student access restrictions.
 
-## Remaining Milestones
-
-Step 9:
-
-- Automated browser tests
-- Security hardening
-- CI quality gates
-
-Step 10:
-
-- Production deployment
-- Live verification
-- Final documentation
-
-```
-
-```
